@@ -12,14 +12,16 @@ import { selectGenreOrCategory } from "../../features/currentGenreOrCategory";
 import { useGetMoviesQuery } from "../../services/TMDB";
 import { MovieList } from "..";
 
+// The actual fetching of movie data from the API; trigerred after the needed data is set from other components
 const Movies = () => {
   const [page, setPage] = useState(1);
-  const { genreIdOrCategoryName } = useSelector(
+  const { genreIdOrCategoryName, searchQuery } = useSelector(
     (state) => state.currentGenreOrCategory
   );
   const { data, error, isFetching } = useGetMoviesQuery({
     genreIdOrCategoryName,
     page,
+    searchQuery,
   });
 
   if (isFetching) {
